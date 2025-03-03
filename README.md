@@ -10,7 +10,7 @@ Welcome to **Tic-Tac-Toe** – a modern, stylish, and interactive game built usi
 - ⚡ **Responsive Design** – Play on mobile, tablet, or desktop
 
 ## 🚀 Live Demo
-🔗 **[Play Now](#)** https://amit81082.github.io/Tic_Tac_Toe/
+🔗 **[Play Now](#)**     https://amit81082.github.io/Tic_Tac_Toe/
 
 ## 🎲 How to Play?
 1. Click on an empty square to place your move (❌ or ⭘).
