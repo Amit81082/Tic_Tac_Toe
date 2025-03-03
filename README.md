@@ -9,6 +9,14 @@ Welcome to **Tic-Tac-Toe** – a modern, stylish, and interactive game built usi
 - 🎭 **Hover Effects & Animations** for a lively experience
 - ⚡ **Responsive Design** – Play on mobile, tablet, or desktop
 
+- Screenshots
+- ![image](https://github.com/user-attachments/assets/994c0cdd-7f2c-4c3d-b426-4c91011ca5aa)
+- ![image](https://github.com/user-attachments/assets/ef6dedd5-3127-4c74-8162-56fa7dce1844)
+- ![image](https://github.com/user-attachments/assets/76aeadbb-c266-4f90-b239-d0b82174f55a)
+
+
+
+
 ## 🚀 Live Demo
 🔗 **[Play Now](#)**     https://amit81082.github.io/Tic_Tac_Toe/
 
