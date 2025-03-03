@@ -7,16 +7,24 @@ document.addEventListener("DOMContentLoaded", () => {
 
     let currentPlayer = "X";
     let cells = Array(9).fill(null);
+    
+    // 🔊 Preload sounds for instant playback
     let clickSound = new Audio("click.mp3");
     let winSound = new Audio("win.mp3");
     let drawSound = new Audio("draw.mp3");
 
+    // ✅ Ensure mobile-friendly audio
+    function playSound(sound) {
+        sound.currentTime = 0; 
+        sound.play().catch(err => console.log("Audio play blocked:", err)); // Handle mobile restrictions
+    }
+
     let scores = JSON.parse(localStorage.getItem("ticTacToeScores")) || { X: 0, O: 0 };
 
     const winPatterns = [
-        [0, 1, 2], [3, 4, 5], [6, 7, 8], // Rows
-        [0, 3, 6], [1, 4, 7], [2, 5, 8], // Columns
-        [0, 4, 8], [2, 4, 6]             // Diagonals
+        [0, 1, 2], [3, 4, 5], [6, 7, 8], 
+        [0, 3, 6], [1, 4, 7], [2, 5, 8], 
+        [0, 4, 8], [2, 4, 6]            
     ];
 
     function createBoard() {
@@ -26,13 +34,9 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.classList.add("cell");
             cell.dataset.index = index;
             cell.addEventListener("click", () => makeMove(index, cell));
+            cell.addEventListener("touchstart", () => makeMove(index, cell)); // ✅ Mobile touch support
             board.appendChild(cell);
         });
-    }
-
-    function playSound(sound) {
-        sound.currentTime = 0; // 🔥 Instant play without delay
-        sound.play();
     }
 
     function makeMove(index, cell) {
@@ -41,7 +45,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.textContent = currentPlayer;
         cell.classList.add(currentPlayer.toLowerCase());
 
-        playSound(clickSound); // ✅ Click sound fix
+        playSound(clickSound); // ✅ Mobile-friendly click sound
 
         if (checkWinner()) {
             statusText.textContent = `${currentPlayer} Wins! 🎉`;
@@ -77,11 +81,11 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPlayer = "X";
         statusText.textContent = "Tic-Tac-Toe";
         createBoard();
-        playSound(clickSound); // ✅ Restart Button Sound
+        playSound(clickSound); // ✅ Restart sound
     }
 
     function handleWin(winner) {
-        playSound(winSound); // ✅ Winning Sound
+        playSound(winSound); // ✅ Win sound
         updateScore(winner);
 
         const victoryGif = document.getElementById("victoryGif");
@@ -102,10 +106,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
-        playSound(clickSound); // ✅ Theme Toggle Sound
+        playSound(clickSound); // ✅ Toggle theme sound
     });
 
     restartBtn.addEventListener("click", restartGame);
+    restartBtn.addEventListener("touchstart", restartGame); // ✅ Mobile support
+
+    // 🔥 Load sounds on first user interaction (fix for mobile browsers)
+    document.body.addEventListener("click", () => {
+        clickSound.load();
+        winSound.load();
+        drawSound.load();
+    }, { once: true });
 
     createBoard();
     updateScore();
