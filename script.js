@@ -106,8 +106,12 @@ document.addEventListener("DOMContentLoaded", () => {
         playInstantSound("click.mp3"); // ✅ Toggle theme sound
     });
 
+    restartBtn.addEventListener("touchstart", (e) => {
+        e.preventDefault();  // ✅ Mobile me click duplicate hone se roke
+        restartGame();
+    });
     restartBtn.addEventListener("click", restartGame);
-    // restartBtn.addEventListener("touchstart", restartGame); // ✅ Mobile support
+    
 
     createBoard();
     updateScore();
