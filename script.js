@@ -99,19 +99,9 @@ document.addEventListener("DOMContentLoaded", () => {
         scoreboard.innerHTML = `X: ${scores.X} | O: ${scores.O}`;
     }
 
-    // Smooth Theme Toggle with Transition
-document.getElementById('toggleTheme').addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    localStorage.setItem('theme', document.body.classList.contains('dark-mode') ? 'dark' : 'light');
-});
-
-// Apply Saved Theme on Load
-window.onload = () => {
-    if (localStorage.getItem('theme') === 'dark') {
-        document.body.classList.add('dark-mode');
-    }
-};
-
+    themeToggle.addEventListener("click", () => {
+        document.body.classList.toggle("dark-mode");
+    });
 
     restartBtn.addEventListener("click", restartGame);
 
