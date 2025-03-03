@@ -8,16 +8,8 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentPlayer = "X";
     let cells = Array(9).fill(null);
     
-    // 🔊 Preload sounds for instant playback
-    let clickSound = new Audio("click.mp3");
     let winSound = new Audio("win.mp3");
     let drawSound = new Audio("draw.mp3");
-
-    // ✅ Ensure mobile-friendly audio
-    function playSound(sound) {
-        sound.currentTime = 0; 
-        sound.play().catch(err => console.log("Audio play blocked:", err)); // Handle mobile restrictions
-    }
 
     let scores = JSON.parse(localStorage.getItem("ticTacToeScores")) || { X: 0, O: 0 };
 
@@ -45,7 +37,7 @@ document.addEventListener("DOMContentLoaded", () => {
         cell.textContent = currentPlayer;
         cell.classList.add(currentPlayer.toLowerCase());
 
-        playSound(clickSound); // ✅ Mobile-friendly click sound
+        playInstantSound("click.mp3"); // ✅ Instant click sound
 
         if (checkWinner()) {
             statusText.textContent = `${currentPlayer} Wins! 🎉`;
@@ -53,10 +45,15 @@ document.addEventListener("DOMContentLoaded", () => {
             handleWin(currentPlayer);
         } else if (!cells.includes(null)) {
             statusText.textContent = "Draw! 😐";
-            playSound(drawSound);
+            playInstantSound("draw.mp3"); // ✅ Draw sound
         } else {
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
+    }
+
+    function playInstantSound(file) {
+        let sound = new Audio(file);
+        sound.play().catch(err => console.log("Audio play error:", err));
     }
 
     function checkWinner() {
@@ -81,11 +78,11 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPlayer = "X";
         statusText.textContent = "Tic-Tac-Toe";
         createBoard();
-        playSound(clickSound); // ✅ Restart sound
+        playInstantSound("click.mp3"); // ✅ Restart sound
     }
 
     function handleWin(winner) {
-        playSound(winSound); // ✅ Win sound
+        playInstantSound("win.mp3"); // ✅ Win sound
         updateScore(winner);
 
         const victoryGif = document.getElementById("victoryGif");
@@ -106,18 +103,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
-        playSound(clickSound); // ✅ Toggle theme sound
+        playInstantSound("click.mp3"); // ✅ Toggle theme sound
     });
 
     restartBtn.addEventListener("click", restartGame);
     restartBtn.addEventListener("touchstart", restartGame); // ✅ Mobile support
-
-    // 🔥 Load sounds on first user interaction (fix for mobile browsers)
-    document.body.addEventListener("click", () => {
-        clickSound.load();
-        winSound.load();
-        drawSound.load();
-    }, { once: true });
 
     createBoard();
     updateScore();
