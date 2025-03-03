@@ -9,8 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let cells = Array(9).fill(null);
     let clickSound = new Audio("click.mp3");
     let winSound = new Audio("win.mp3");
-    let DrawSound = new Audio("draw.mp3")
-    // let victorygif = "excited.gif";
+    let drawSound = new Audio("draw.mp3");
 
     let scores = JSON.parse(localStorage.getItem("ticTacToeScores")) || { X: 0, O: 0 };
 
@@ -31,12 +30,18 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
+    function playSound(sound) {
+        sound.currentTime = 0; // 🔥 Instant play without delay
+        sound.play();
+    }
+
     function makeMove(index, cell) {
         if (cells[index] || checkWinner()) return;
         cells[index] = currentPlayer;
         cell.textContent = currentPlayer;
         cell.classList.add(currentPlayer.toLowerCase());
-        clickSound.play(); // ✅ Click sound
+
+        playSound(clickSound); // ✅ Click sound fix
 
         if (checkWinner()) {
             statusText.textContent = `${currentPlayer} Wins! 🎉`;
@@ -44,8 +49,7 @@ document.addEventListener("DOMContentLoaded", () => {
             handleWin(currentPlayer);
         } else if (!cells.includes(null)) {
             statusText.textContent = "Draw! 😐";
-            DrawSound.play();
-
+            playSound(drawSound);
         } else {
             currentPlayer = currentPlayer === "X" ? "O" : "X";
         }
@@ -73,23 +77,20 @@ document.addEventListener("DOMContentLoaded", () => {
         currentPlayer = "X";
         statusText.textContent = "Tic-Tac-Toe";
         createBoard();
+        playSound(clickSound); // ✅ Restart Button Sound
     }
 
-    const victoryGif = document.getElementById("victoryGif"); // GIF पकड़ो
-
     function handleWin(winner) {
-        winSound.play();  
+        playSound(winSound); // ✅ Winning Sound
         updateScore(winner);
-    
-        // 🎉 GIF दिखाओ!
+
+        const victoryGif = document.getElementById("victoryGif");
         victoryGif.classList.add("show");
-    
-        // 3 सेकंड बाद GIF हटाओ
+
         setTimeout(() => {
             victoryGif.classList.remove("show");
         }, 3000);
     }
-    
 
     function updateScore(winner) {
         if (winner) {
@@ -101,10 +102,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
     themeToggle.addEventListener("click", () => {
         document.body.classList.toggle("dark-mode");
+        playSound(clickSound); // ✅ Theme Toggle Sound
     });
 
     restartBtn.addEventListener("click", restartGame);
 
     createBoard();
-    updateScore(); // ✅ Scoreboard initialize
+    updateScore();
 });
