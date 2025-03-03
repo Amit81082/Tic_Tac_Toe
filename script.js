@@ -107,7 +107,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     restartBtn.addEventListener("click", restartGame);
-    restartBtn.addEventListener("touchstart", restartGame); // ✅ Mobile support
+    // restartBtn.addEventListener("touchstart", restartGame); // ✅ Mobile support
 
     createBoard();
     updateScore();
