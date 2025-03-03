@@ -107,10 +107,12 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     restartBtn.addEventListener("touchstart", (e) => {
-        e.preventDefault();  // ✅ Mobile me click duplicate hone se roke
+        e.preventDefault();  // ✅ Click event ko double fire hone se roke
         restartGame();
-    });
+    }, { passive: false });
+    
     restartBtn.addEventListener("click", restartGame);
+    
     
 
     createBoard();
