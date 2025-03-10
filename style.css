@@ -6,23 +6,22 @@ body {
     align-items: center;
     height: 100vh;
     background: linear-gradient(135deg, #6a11cb, #2575fc);
-
     background-size: 300% 300%;
     font-family: Arial, sans-serif;
     margin: 0;
+    transition: background-color 1s ease, color 1s ease;
 }
 
-#themeToggle{
-    margin-left: 45px;
-    padding: 11px 20px;
-    
+/* Theme Toggle Button */
+#themeToggle {
+    margin: 10px;
+    padding: 12px 24px;
+    font-size: 1rem;
 }
-
-
 
 /* Game Title */
 .game-title {
-    font-size: 3rem;
+    font-size: clamp(2rem, 6vw, 3rem);
     font-weight: bold;
     color: #ffea00;
     text-shadow: 0 0 20px #ffea00, 0 0 40px #ffcc00;
@@ -38,20 +37,22 @@ body {
 
 .board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
+    grid-template-columns: repeat(3, minmax(70px, 100px));
+    grid-template-rows: repeat(3, minmax(70px, 100px));
     gap: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Cells */
 .cell {
-    user-select: none; /* ✅ Mobile pe text selection disable */
-    width: 100px;
-    height: 100px;
+    user-select: none;
+    width: min(22vw, 100px);
+    height: min(22vw, 100px);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3rem;
+    font-size: min(10vw, 3rem);
     font-weight: bold;
     cursor: pointer;
     border-radius: 10px;
@@ -83,15 +84,27 @@ body {
 /* Restart Button */
 #restartBtn {
     margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 1.2rem;
+    /* margin-left: 20px; */
+    padding: 12px 24px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     border: none;
     background-color: black;
     color: white;
     cursor: pointer;
-    border-radius: 5px;
+    border-radius: 8px;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
+}
+
+#restartBtn {
+    margin-right: 14px; /* ✅ Restart aur Theme Toggle ke beech gap */
+}
+
+/* Choti screen ke liye responsive spacing */
+@media (max-width: 500px) {
+    #restartBtn {
+        margin-right:7px; /* ✅ Choti screen pe thoda kam gap */
+    }
 }
 
 
@@ -100,6 +113,8 @@ body {
     background-color: #222;
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.7);
 }
+
+
 
 /* Dark Mode */
 .dark-mode {
@@ -127,8 +142,8 @@ body {
 button {
     background: linear-gradient(45deg, #ff6b6b, #ffcc5c);
     border: none;
-    padding: 10px 20px;
-    font-size: 18px;
+    padding: 12px 24px;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     font-weight: bold;
     color: white;
     border-radius: 8px;
@@ -144,17 +159,6 @@ button:hover {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
 }
 
-/* Smooth Light/Dark Mode Transition */
-body {
-    transition: background-color 1s ease, color 1s ease;
-}
-
-/* Dark Mode Styles */
-.dark-mode {
-    background-color: #222;
-    color: white;
-}
-
 /* Adjust Button Colors in Dark Mode */
 .dark-mode button {
     background: linear-gradient(45deg, #66a6ff, #89f7fe);
@@ -165,44 +169,48 @@ body {
     background: linear-gradient(45deg, #89f7fe, #66a6ff);
 }
 
-
+/* Glow Animation */
 @keyframes glow {
-    0% { background-color: yellow; }
-    100% { background-color: orange; }
+    0% {
+        background-color: yellow;
+    }
+    100% {
+        background-color: orange;
+    }
 }
 
 /* Fully Responsive Design */
 @media (max-width: 500px) {
     .board {
-        grid-template-columns: repeat(3, 80px);
-        grid-template-rows: repeat(3, 80px);
+        grid-template-columns: repeat(3, minmax(60px, 80px));
+        grid-template-rows: repeat(3, minmax(60px, 80px));
     }
 
     .cell {
-        width: 80px;
-        height: 80px;
-        font-size: 2.5rem;
+        width: min(22vw, 80px);
+        height: min(22vw, 80px);
+        font-size: min(9vw, 2.5rem);
     }
 
     .game-title {
-        font-size: 2.5rem;
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
     }
 }
 
 @media (max-width: 350px) {
     .board {
-        grid-template-columns: repeat(3, 70px);
-        grid-template-rows: repeat(3, 70px);
+        grid-template-columns: repeat(3, minmax(55px, 70px));
+        grid-template-rows: repeat(3, minmax(55px, 70px));
     }
 
     .cell {
-        width: 70px;
-        height: 70px;
-        font-size: 2rem;
+        width: min(22vw, 70px);
+        height: min(22vw, 70px);
+        font-size: min(8vw, 2rem);
     }
 
     .game-title {
-        font-size: 2rem;
+        font-size: clamp(1.5rem, 4.5vw, 2rem);
     }
 }
 

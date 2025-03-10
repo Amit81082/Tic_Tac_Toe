@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
     let winSound = new Audio("win.mp3");
     let drawSound = new Audio("draw.mp3");
 
-    // document.addEventListener("selectstart", (e) => e.preventDefault()); // ✅ Mobile pe text select hone se roke
+    document.addEventListener("selectstart", (e) => e.preventDefault()); // ✅ Mobile pe text select hone se roke
 
 
     let scores = JSON.parse(localStorage.getItem("ticTacToeScores")) || { X: 0, O: 0 };
