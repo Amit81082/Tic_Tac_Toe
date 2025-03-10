@@ -11,6 +11,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let winSound = new Audio("win.mp3");
     let drawSound = new Audio("draw.mp3");
 
+    document.addEventListener("selectstart", (e) => e.preventDefault()); // ✅ Mobile pe text select hone se roke
+
+
     let scores = JSON.parse(localStorage.getItem("ticTacToeScores")) || { X: 0, O: 0 };
 
     const winPatterns = [
@@ -28,6 +31,9 @@ document.addEventListener("DOMContentLoaded", () => {
             cell.addEventListener("click", () => makeMove(index, cell));
             cell.addEventListener("touchstart", () => makeMove(index, cell)); // ✅ Mobile touch support
             board.appendChild(cell);
+            cell.style.userSelect = "none"; // ✅ Mobile pe accidental selection disable
+cell.setAttribute("contenteditable", "false"); // ✅ Editable disable karega
+
         });
     }
 

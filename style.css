@@ -41,6 +41,7 @@ body {
 
 /* Cells */
 .cell {
+    user-select: none; /* ✅ Mobile pe text selection disable */
     width: 100px;
     height: 100px;
     display: flex;
