@@ -12,7 +12,11 @@ body {
     margin: 0;
 }
 
-
+#themeToggle{
+    margin-left: 45px;
+    padding: 11px 20px;
+    
+}
 
 
 
@@ -79,7 +83,7 @@ body {
 /* Restart Button */
 #restartBtn {
     margin-top: 20px;
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 1.2rem;
     border: none;
     background-color: black;
@@ -89,6 +93,7 @@ body {
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
     transition: transform 0.2s, box-shadow 0.2s, background 0.3s;
 }
+
 
 #restartBtn:hover {
     transform: scale(1.1);
